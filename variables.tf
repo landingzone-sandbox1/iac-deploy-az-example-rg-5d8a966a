@@ -75,6 +75,7 @@ variable "rg_config" {
     }), null)
   })
   default = {
+    subscription_id = "value-not-set"
     tags = {}
     lock = null
   }
