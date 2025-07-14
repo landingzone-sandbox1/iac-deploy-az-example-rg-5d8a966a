@@ -71,11 +71,5 @@ test/go.sum
 TestRecord/
 **/TestRecord.md.tmp
 .azure/
-invocation-examples/local-testing.md
-invocation-examples/README.md
-invocation-examples/simple.tf
-invocation-examples/test-local.ps1
-invocation-examples/test.tf
-invocation-examples/TESTING-SUMMARY.md
-invocation-examples/README.md
-invocation-examples/rbac-example.tf
+
+/module-source/

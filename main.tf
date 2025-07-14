@@ -24,10 +24,10 @@ provider "azurerm" {
 
 module "azure_rg_example" {
   # Use this source for local development:
-  source = "./module-source/iac-mod-az-resource-group"
+  # source = "./module-source/iac-mod-az-resource-group"
   # For production, use:
   # tflint-ignore: terraform_module_pinned_source
-  # source = "git::ssh://git@github.com/landingzone-sandbox/iac-mod-az-resource-group.git"
+  source = "git::ssh://git@github.com/landingzone-sandbox/iac-mod-az-resource-group.git"
 
   # Pass-through variables directly to the child module
   location              = var.location
