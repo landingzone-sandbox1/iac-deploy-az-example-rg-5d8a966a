@@ -1,0 +1,50 @@
+name: IaC Deployment - Certification
+on:
+  workflow_dispatch:
+    inputs:
+      destroy:
+        type: boolean
+        description: "Destroy"
+        required: false
+        default: false
+      LOGIN_TO_AZURE:
+        description: "it is necessary to log in to azure"
+        default: false
+        type: boolean
+        required: false
+      plan_only:
+        type: boolean
+        description: "Execute only the plan"
+        required: false
+        default: false
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    outputs:
+      teams: ${{ steps.actorTeams.outputs.teams }}
+    steps:
+      - name: Get Teams from the Actor
+        uses: tspascoal/get-user-teams-membership@v2
+        id: actorTeams
+        with:
+          username: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_READ_ORG }}
+
+  production:
+    name: Deploy to Certification
+    uses: "landingzone-sandbox/actions-templates/.github/workflows/deploy-iac-tf-generic.yml@main"
+    if: github.ref == 'refs/heads/main' && (contains(needs.validation.outputs.teams, 'gh-microsoft-team') || contains(needs.validation.outputs.teams, 'gh-it-engineering'))
+    needs: validation
+    with:
+      environment: "certification"
+      destroy: ${{ inputs.destroy }}
+      backend_storage_account_name: ${{ vars.AZURE_ST_NAME_CRT }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      LOGIN_TO_AZURE: ${{ inputs.LOGIN_TO_AZURE }}
+      plan_only: ${{ inputs.plan_only }}
+    secrets:
+      GH_REPOSITORY_TOKEN: ${{ secrets.GH_REPOSITORY_TOKEN }}
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_SP }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET_SP }}
+      ARM_ACCESS_KEY: ${{ secrets.AZURE_ST_ACCESS_KEY_CRT }}
