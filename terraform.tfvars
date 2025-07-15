@@ -3,12 +3,12 @@
 # =========================
 
 # Location - use the display name format expected by child modules  
-location = "East US"
+location = "East US 2"
 
 # Naming configuration object
 naming = {
   application_code = "CORE"
-  objective_code   = "INFR"
+  objective_code   = "SEGU"
   environment      = "D"
   correlative      = "95"
 }
