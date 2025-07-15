@@ -36,7 +36,12 @@ variable "naming_override" {
     correlative      = optional(string)
     objective_code   = optional(string)
   })
-  default = {}
+  default = {
+    application_code = "GEIA"
+    environment      = "D"
+    correlative      = "01"
+    objective_code   = "INFR"
+  }
 }
 
 locals {
