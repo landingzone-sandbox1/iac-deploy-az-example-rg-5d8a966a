@@ -24,6 +24,7 @@ naming = {
 
 # Resource Group Configuration
 rg_config = {
+  subscription_id = "0a5095ad-a860-4c57-aa7a-53276e51e748"
   tags = {
     Environment = "Development"
     Project     = "Demo Resource Group"
