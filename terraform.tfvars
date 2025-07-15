@@ -9,6 +9,8 @@ location = "East US"
 naming = {
   application_code = "CORE"
   objective_code   = "INFR"
+  environment      = "D"
+  correlative      = "95"
 }
 
 # Resource Group configuration

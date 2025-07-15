@@ -1,8 +1,8 @@
 terraform {
   required_version = "~> 1.9"
-  backend "azurerm" {
-  use_azuread_auth     = true
-  }
+  # backend "azurerm" {
+  # use_azuread_auth     = true
+  # }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -31,7 +31,7 @@ module "azure_rg_example" {
 
   # Pass-through variables directly to the child module
   location              = var.location
-  naming                = var.naming
+  naming                = local.merged_naming
   resource_group_config = var.rg_config
 
   # Storage config passed directly (naming is passed separately)

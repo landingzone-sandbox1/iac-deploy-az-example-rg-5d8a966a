@@ -13,7 +13,7 @@ variable "location" {
 }
 
 variable "naming" {
-  description = "Naming convention settings for all resources. All fields are optional to allow workspace-specific overrides."
+  description = "Base naming convention settings."
   type = object({
     application_code = optional(string, null)
     environment      = optional(string, null)
@@ -26,37 +26,39 @@ variable "naming" {
     correlative      = "01"
     objective_code   = "INFR"
   }
+}
 
-  validation {
-    condition = (
-      var.naming.application_code == null || 
-      can(regex("^[a-zA-Z0-9]{4}$", var.naming.application_code))
-    )
-    error_message = "When provided, application_code must be exactly 4 alphanumeric characters."
-  }
+variable "naming_override" {
+  description = "Override naming convention settings for environment."
+  type = object({
+    application_code = optional(string)
+    environment      = optional(string)
+    correlative      = optional(string)
+    objective_code   = optional(string)
+  })
+  default = {}
+}
 
-  validation {
-    condition = (
-      var.naming.environment == null || 
-      contains(["P", "C", "D", "F"], var.naming.environment)
-    )
-    error_message = "When provided, environment must be one of: P, C, D, F."
-  }
+locals {
+  merged_naming = merge(var.naming, var.naming_override)
+  naming_valid_application_code = (
+    local.merged_naming.application_code == null ? true : can(regex("^[a-zA-Z0-9]{4}$", local.merged_naming.application_code))
+  )
+  naming_valid_environment = (
+    local.merged_naming.environment == null ? true : contains(["P", "C", "D", "F"], local.merged_naming.environment)
+  )
+  naming_valid_correlative = (
+    local.merged_naming.correlative == null ? true : can(regex("^[0-9]{2}$", local.merged_naming.correlative))
+  )
+  naming_valid_objective_code = (
+    local.merged_naming.objective_code == null ? true : (local.merged_naming.objective_code == "" ? true : can(regex("^[A-Za-z]{3,4}$", local.merged_naming.objective_code)))
+  )
+}
 
-  validation {
-    condition = (
-      var.naming.correlative == null || 
-      can(regex("^[0-9]{2}$", var.naming.correlative))
-    )
-    error_message = "When provided, correlative must be two digits."
-  }
-
-  validation {
-    condition = (
-      var.naming.objective_code == "" || 
-      can(regex("^[A-Za-z]{3,4}$", var.naming.objective_code))
-    )
-    error_message = "When provided, objective_code can be 3 or 4 letters."
+resource "null_resource" "naming_validation" {
+  count = local.naming_valid_application_code && local.naming_valid_environment && local.naming_valid_correlative && local.naming_valid_objective_code ? 0 : 1
+  provisioner "local-exec" {
+    command = "echo 'Naming validation failed. Please check your naming and naming_override variables.' && exit 1"
   }
 }
 
