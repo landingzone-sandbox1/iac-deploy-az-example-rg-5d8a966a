@@ -55,6 +55,11 @@ locals {
   )
 }
 
+output "debug_merged_naming" {
+  value = local.merged_naming
+  description = "Debug: Shows the merged naming object after combining naming and naming_override."
+}
+
 resource "null_resource" "naming_validation" {
   count = local.naming_valid_application_code && local.naming_valid_environment && local.naming_valid_correlative && local.naming_valid_objective_code ? 0 : 1
   provisioner "local-exec" {
