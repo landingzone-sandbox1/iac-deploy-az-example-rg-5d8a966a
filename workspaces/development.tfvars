@@ -1,5 +1,5 @@
 # Naming configuration for development environment
-naming = {
+naming_override = {
   environment      = "D"
   correlative      = "95"
 }
