@@ -1,5 +1,5 @@
 # Naming configuration for development environment
-naming = {
+naming_override = {
   application_code = "CORE"
   objective_code   = "SEGU"
   environment      = "D"
