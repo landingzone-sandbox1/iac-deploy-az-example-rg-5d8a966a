@@ -73,3 +73,5 @@ TestRecord/
 .azure/
 
 /module-source/
+
+example.auto.tfvars.json
