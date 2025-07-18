@@ -6,12 +6,12 @@
 location = "East US"
 
 # Naming configuration object
-naming = {
-  application_code = "CORE"
-  objective_code   = "SEGU"
-  environment      = "D"
-  correlative      = "95"
-}
+# naming = {
+#   application_code = "CORE"
+#   objective_code   = "SEGU"
+#   environment      = "D"
+#   correlative      = "95"
+# }
 
 # Resource Group configuration
 rg_config = {
