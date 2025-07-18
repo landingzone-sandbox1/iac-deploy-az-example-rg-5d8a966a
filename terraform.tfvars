@@ -3,7 +3,7 @@
 # =========================
 
 # Location - use the display name format expected by child modules  
-location = "East US 2"
+location = "East US"
 
 # Naming configuration object
 naming = {
