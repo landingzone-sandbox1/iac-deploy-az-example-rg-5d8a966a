@@ -27,7 +27,7 @@ module "azure_rg_example" {
   # source = "./module-source/iac-mod-az-resource-group"
   # For production, use:
   # tflint-ignore: terraform_module_pinned_source
-  source = "git::ssh://git@github.com/landingzone-sandbox/iac-mod-az-resource-group.git?ref=rg-2025-07-11-1"
+  source = "git::ssh://git@github.com/landingzone-sandbox/iac-mod-az-resource-group.git?ref=rg-2025-07-18-2"
 
   # Pass-through variables directly to the child module
   location              = var.location

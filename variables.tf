@@ -195,6 +195,25 @@ variable "keyvault_config" {
       ip_rules                   = []
       virtual_network_subnet_ids = []
     })
+    diagnostic_settings = object({
+      log_analytics_workspace_id = string
+      logs = optional(list(object({
+        category = string
+        enabled  = bool
+        retention_policy = optional(object({
+          enabled = bool
+          days    = number
+        }), null)
+      })), [])
+      metrics = optional(list(object({
+        category = string
+        enabled  = bool
+        retention_policy = optional(object({
+          enabled = bool
+          days    = number
+        }), null)
+      })), [])
+    })
   })
   default = {
     sku_name                        = "premium"
@@ -209,6 +228,11 @@ variable "keyvault_config" {
       default_action             = "Deny"
       ip_rules                   = []
       virtual_network_subnet_ids = []
+    }
+    diagnostic_settings = {
+      log_analytics_workspace_id = ""
+      logs = []
+      metrics = []
     }
   }
 }
