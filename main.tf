@@ -1,8 +1,8 @@
 terraform {
   required_version = "~> 1.9"
-  # backend "azurerm" {
-  # use_azuread_auth     = true
-  # }
+  backend "azurerm" {
+  use_azuread_auth     = true
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
