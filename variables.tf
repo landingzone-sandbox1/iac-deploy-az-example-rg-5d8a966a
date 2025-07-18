@@ -88,7 +88,6 @@ resource "null_resource" "naming_validation" {
 variable "rg_config" {
   description = "Resource Group configuration settings."
   type = object({
-    subscription_id = string
     tags = optional(map(string), {})
     lock = optional(object({
       kind = string

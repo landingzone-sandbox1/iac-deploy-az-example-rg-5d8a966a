@@ -10,12 +10,11 @@ naming = {
   application_code = "CORE"
   objective_code   = "SEGU"
   environment      = "D"
-  correlative      = "95"
+  correlative      = "96"
 }
 
 # Resource Group configuration
 rg_config = {
-  subscription_id = "5d8a966a-abb4-4e7b-831a-19ed1f768b8e"
   tags = {
     Environment = "Development"
     Project     = "GEIA Example"
