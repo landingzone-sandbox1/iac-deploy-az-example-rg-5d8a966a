@@ -27,9 +27,3 @@ output "storage_account" {
   description = "Object containing key storage account outputs."
   value       = module.azure_rg_example.storage_account
 }
-
-
-
-output "debug_naming" {
-  value = var.naming
-}
