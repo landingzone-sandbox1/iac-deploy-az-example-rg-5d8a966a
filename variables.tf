@@ -60,6 +60,15 @@ locals {
   )
 }
 
+output "debug_naming" {
+  value       = var.naming
+  description = "Debug: Shows the naming object as loaded from tfvars or defaults."
+}
+output "debug_naming_override" {
+  value       = var.naming_override
+  description = "Debug: Shows the naming override object as loaded from tfvars or defaults."
+}
+
 output "debug_merged_naming" {
   value = local.merged_naming
   description = "Debug: Shows the merged naming object after combining naming and naming_override."
