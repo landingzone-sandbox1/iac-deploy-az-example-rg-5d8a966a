@@ -1,12 +1,16 @@
 terraform {
   required_version = "~> 1.9"
   backend "azurerm" {
-  use_azuread_auth     = true
+    use_azuread_auth = true
   }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 4.28"
+    }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.0"
     }
   }
 }
@@ -27,7 +31,7 @@ module "azure_rg_example" {
   # source = "./module-source/iac-mod-az-resource-group"
   # For production, use:
   # tflint-ignore: terraform_module_pinned_source
-  source = "git::ssh://git@github.com/landingzone-sandbox/iac-mod-az-resource-group.git?ref=rg-2025-07-11-1"
+  source = "git::ssh://git@github.com/landingzone-sandbox/iac-mod-az-resource-group.git"
 
   # Pass-through variables directly to the child module
   location              = var.location
