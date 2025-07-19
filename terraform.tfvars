@@ -32,3 +32,5 @@ stac_config = {
 # Log Analytics configuration (using defaults from variables.tf) 
 law_config = {}
 
+# Log Analytics configuration (using defaults from variables.tf) 
+keyvault_config = {}     
