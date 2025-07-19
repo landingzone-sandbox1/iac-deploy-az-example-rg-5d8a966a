@@ -70,7 +70,7 @@ output "debug_naming_override" {
 }
 
 output "debug_merged_naming" {
-  value = local.merged_naming
+  value       = local.merged_naming
   description = "Debug: Shows the merged naming object after combining naming and naming_override."
 }
 
@@ -96,8 +96,8 @@ variable "rg_config" {
   })
   default = {
     subscription_id = "value-not-set"
-    tags = {}
-    lock = null
+    tags            = {}
+    lock            = null
   }
 
   validation {
