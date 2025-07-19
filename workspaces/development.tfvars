@@ -3,5 +3,5 @@ naming_override = {
   application_code = "CORE"
   objective_code   = "SEGU"
   environment      = "D"
-  correlative      = "96"
+  correlative      = "97"
 }
