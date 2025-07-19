@@ -36,7 +36,7 @@ law_config = {}
 keyvault_config = {
 
   tenant_id = "00000000-0000-0000-0000-000000000000" # Replace with your Azure tenant ID
-  sku_name                        = "premium" # Premium for testing (includes HSM)
+  sku_name                        = "standard" # Premium for testing (includes HSM)
   enabled_for_disk_encryption     = true      # Allow Azure Disk Encryption
   enabled_for_deployment          = false     # Disable VM deployment access
   enabled_for_template_deployment = false     # Disable ARM template access
