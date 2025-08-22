@@ -10,7 +10,7 @@ naming = {
   application_code = "CORE"
   objective_code   = "SEGU"
   environment      = "D"
-  correlative      = "99"
+  correlative      = "25"
 }
 
 # Resource Group configuration
