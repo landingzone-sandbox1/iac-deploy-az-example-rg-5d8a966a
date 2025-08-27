@@ -8,9 +8,9 @@ location = "East US"
 # Naming configuration object
 naming = {
   application_code = "CORE"
-  objective_code   = "INFR"
+  objective_code   = "GEIA"
   environment      = "D"
-  correlative      = "39"
+  correlative      = "90"
 }
 
 # Resource Group configuration
