@@ -8,9 +8,10 @@ location = "East US"
 # Naming configuration object
 naming = {
   application_code = "CORE"
-  objective_code   = "SVLS"
+  objective_code   = "SEGU"
   environment      = "D"
   correlative      = "90"
+
 }
 
 # Resource Group configuration
