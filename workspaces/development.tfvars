@@ -1,7 +1,7 @@
 # Naming configuration for development environment
 naming_override = {
   application_code = "CORE"
-  objective_code   = "SEGU"
-  environment      = "F"
-  correlative      = "98"
+  objective_code   = "SVLS"
+  environment      = "D"
+  correlative      = "90"
 }
