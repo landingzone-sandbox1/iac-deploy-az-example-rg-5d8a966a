@@ -1,21 +1,19 @@
 # =========================
-# Updated terraform.tfvars to match new variable structure
+# terraform.tfvars — listo
 # =========================
 
-# Location - use the display name format expected by child modules  
 location = "East US"
 
-# Naming configuration object
+# Cambia 'correlative' si vuelve a chocar algún nombre (94, 95, …)
 naming = {
-  application_code = "HOLA"
-  objective_code   = "CHAU"
+  application_code = "INFR"
+  objective_code   = "SVLS"
   environment      = "D"
-  correlative      = "95"
-
+  correlative      = "93"
 }
 
-# Resource Group configuration
-rg_config = {
+# Resource Group
+resource_group_config = {
   tags = {
     Environment = "Development"
     Project     = "GEIA Example"
@@ -23,56 +21,43 @@ rg_config = {
   lock = null
 }
 
-# Storage Account configuration (using defaults from variables.tf)
-stac_config = {
-  # Enable deployment mode to allow shared access keys during deployment
-  enable_deployment_mode    = true # This forces shared_access_key_enabled = true
-  shared_access_key_enabled = true # Explicit setting (recommended for clarity)
+# Storage Account
+storage_config = {
+  enable_deployment_mode    = true
+  shared_access_key_enabled = true
+
+  tags = {
+    Environment = "Development"
+  }
+
+  # Si necesitas forzar nombre único en vez de depender del naming:
+  # name         = "staceu1infrsvlsd93jlm01"     # o
+  # account_name = "staceu1infrsvlsd93jlm01"
 }
 
-# Log Analytics configuration (using defaults from variables.tf) 
-law_config = {}
+# Log Analytics
+log_analytics_config = {
+  # vacío → defaults del módulo
+}
 
-# Log Analytics configuration (using defaults from variables.tf) 
+# Key Vault
 keyvault_config = {
+  tenant_id = "831042d1-f40d-4dde-93fc-d04681888dd3"
+  sku_name  = "standard"
 
-  tenant_id                       = "00000000-0000-0000-0000-000000000000" # Replace with your Azure tenant ID
-  sku_name                        = "standard"                             # Premium for testing (includes HSM)
-  enabled_for_disk_encryption     = true                                   # Allow Azure Disk Encryption
-  enabled_for_deployment          = false                                  # Disable VM deployment access
-  enabled_for_template_deployment = false                                  # Disable ARM template access
-  purge_protection_enabled        = true                                   # Enable purge protection
-  soft_delete_retention_days      = 90                                     # 90-day retention for deleted keys
-  public_network_access_enabled   = false                                  # Disable public access
+  enabled_for_disk_encryption     = true
+  enabled_for_deployment          = false
+  enabled_for_template_deployment = false
+  purge_protection_enabled        = true
+  soft_delete_retention_days      = 90
+
+  # Mientras no uses Private Endpoint/ACLs, deja true para no bloquearte
+  public_network_access_enabled = true
 
   network_acls = {
-    bypass         = "AzureServices" # Allow trusted Azure services
-    default_action = "Deny"          # Deny all other access by default
-    ip_rules = [
-      # Add your public IP addresses here for testing access
-      # "203.0.113.1",  # Example: Your office IP
-      # "203.0.113.2"   # Example: Your home IP
-    ]
-    virtual_network_subnet_ids = [] # No VNet integration for basic testing
+    bypass         = "AzureServices"
+    default_action = "Allow"   # si lo pones en "Deny", agrega ip_rules o VNets
+    ip_rules                   = []
+    virtual_network_subnet_ids = []
   }
-
-  diagnostic_settings = {
-    default = {
-      name                       = "default"
-      log_analytics_workspace_id = "/subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/example-resource-group/providers/Microsoft.OperationalInsights/workspaces/workspaceName" # Replace with your Log Analytics Workspace resource ID
-
-      # Optional: logs and metrics use defaults if omitted, but you can specify them explicitly:
-      enabled_logs = [
-        {
-          category_group = "audit"
-        }
-      ]
-      metrics = [
-        {
-          category = "AllMetrics"
-          enabled  = true
-        }
-      ]
-    }
-  }
-}    
+}
