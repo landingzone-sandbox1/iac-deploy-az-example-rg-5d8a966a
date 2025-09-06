@@ -20,7 +20,7 @@ on:
 jobs:
   integration:
     name: Development
-    uses: "landingzone-sandbox/actions-templates/.github/workflows/deploy-iac-tf-generic.yml@main"
+    uses: "landingzone-sandbox1/actions-templates/.github/workflows/deploy-iac-tf-generic.yml@main"
     with:
       environment: "development"
       destroy: ${{ inputs.destroy  }}
