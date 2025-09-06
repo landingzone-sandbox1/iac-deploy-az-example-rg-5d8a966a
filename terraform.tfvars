@@ -2,9 +2,10 @@
 # terraform.tfvars — listo
 # =========================
 
+# Región
 location = "East US"
 
-# Cambia 'correlative' si vuelve a chocar algún nombre (94, 95, …)
+# Esquema de nombres (si vuelve a chocar, sube correlative: 94, 95…)
 naming = {
   application_code = "INFR"
   objective_code   = "SVLS"
@@ -12,8 +13,8 @@ naming = {
   correlative      = "93"
 }
 
-# Resource Group
-resource_group_config = {
+# -------- Resource Group (usa el nombre de variable correcto) --------
+rg_config = {
   tags = {
     Environment = "Development"
     Project     = "GEIA Example"
@@ -21,26 +22,29 @@ resource_group_config = {
   lock = null
 }
 
-# Storage Account
-storage_config = {
+# -------- Storage Account (usa stac_config) --------
+stac_config = {
+  # Permite claves durante el despliegue (backend/diag)
   enable_deployment_mode    = true
   shared_access_key_enabled = true
 
+  # Etiquetas opcionales (si tu módulo las mergea)
   tags = {
     Environment = "Development"
   }
 
-  # Si necesitas forzar nombre único en vez de depender del naming:
-  # name         = "staceu1infrsvlsd93jlm01"     # o
+  # NO defino 'name'/'account_name' aquí a menos que tu módulo lo acepte.
+  # Si tu módulo soporta override explícito y prefieres forzarlo, añade UNO:
+  # name         = "staceu1infrsvlsd93jlm01"
   # account_name = "staceu1infrsvlsd93jlm01"
 }
 
-# Log Analytics
-log_analytics_config = {
+# -------- Log Analytics (usa law_config) --------
+law_config = {
   # vacío → defaults del módulo
 }
 
-# Key Vault
+# -------- Key Vault (keyvault_config se mantiene igual) --------
 keyvault_config = {
   tenant_id = "831042d1-f40d-4dde-93fc-d04681888dd3"
   sku_name  = "standard"
@@ -56,8 +60,11 @@ keyvault_config = {
 
   network_acls = {
     bypass         = "AzureServices"
-    default_action = "Allow"   # si lo pones en "Deny", agrega ip_rules o VNets
+    default_action = "Allow"   # Si cambias a "Deny", añade ip_rules/VNets
     ip_rules                   = []
     virtual_network_subnet_ids = []
   }
+
+  # Si tu módulo acepta 'name' y quieres forzarlo en lugar de depender de naming:
+  # name = "azkveu1infrsvlsd93jlm01"
 }
