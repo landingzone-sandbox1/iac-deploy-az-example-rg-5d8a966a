@@ -32,7 +32,7 @@ jobs:
 
   production:
     name: Deploy to Certification
-    uses: "landingzone-sandbox/actions-templates/.github/workflows/deploy-iac-tf-generic.yml@main"
+    uses: "landingzone-sandbox1/actions-templates/.github/workflows/deploy-iac-tf-generic.yml@main"
     if: github.ref == 'refs/heads/main' && (contains(needs.validation.outputs.teams, 'gh-microsoft-team') || contains(needs.validation.outputs.teams, 'gh-it-engineering'))
     needs: validation
     with:
