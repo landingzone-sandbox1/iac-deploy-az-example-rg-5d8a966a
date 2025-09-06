@@ -7,8 +7,8 @@ location = "East US"
 
 # Naming configuration object
 naming = {
-  application_code = "INFR"
-  objective_code   = "SVLS"
+  application_code = "HOLA"
+  objective_code   = "CHAU"
   environment      = "D"
   correlative      = "92"
 
