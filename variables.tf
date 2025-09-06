@@ -21,10 +21,10 @@ variable "naming" {
     objective_code   = optional(string, "INFR")
   })
   default = {
-    application_code = "GEIA"
+    application_code = "HOLA"
     environment      = "D"
-    correlative      = "01"
-    objective_code   = "INFR"
+    correlative      = "02"
+    objective_code   = "CHAU"
   }
 }
 
